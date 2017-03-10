@@ -149,6 +149,14 @@ public interface TestDescriptor {
 
 	/**
 	 * Determine if this descriptor describes a container.
+	 *
+	 * <p>This default implementation negates the boolean result returned by
+	 * {@link #isTest()}. This makes being a test descriptor or a container
+	 * descriptor mutual exclusive.
+	 *
+	 * @return {@code true} if this descriptor is a container; if it is a
+	 * test {@code false} is returned.
+	 * @see #isTest()
 	 */
 	default boolean isContainer() {
 		return !isTest();
@@ -156,14 +164,51 @@ public interface TestDescriptor {
 
 	/**
 	 * Determine if this descriptor describes a test.
+	 *
+	 * @return {@code true} if this descriptor is a test; if it is a
+	 * container {@code false} is returned.
+	 * @see #isContainer()
 	 */
 	boolean isTest();
 
 	/**
 	 * Determine if this descriptor or any of its descendants describes a test.
+	 *
+	 * <p>This default implementation recursively calls itself until a descriptor
+	 * returns {@code true} to {@link #isTest()}; starting with this descriptor
+	 * instance.
 	 */
 	default boolean hasTests() {
-		return (isTest() || getChildren().stream().anyMatch(TestDescriptor::hasTests));
+		return isTest() || getChildren().stream().anyMatch(TestDescriptor::hasTests);
+	}
+
+	/**
+	 * Remove this descriptor from hierarchy unless it is a root or has tests.
+	 *
+	 * <p>An engine implementation may override this method and do it differently
+	 * or skip pruning altogether.
+	 *
+	 * @see #isRoot()
+	 * @see #hasTests()
+	 * @see #removeFromHierarchy()
+	 */
+	default void prune() {
+		if (isRoot() || hasTests()) {
+			return;
+		}
+		removeFromHierarchy();
+	}
+
+	/**
+	 * Remove this and descendant descriptors from hierarchy.
+	 *
+	 * <p>The default implementation passes the potentially overridden
+	 * {@link #prune()} as a {@link Visitor} to this instance. I.e. it removes
+	 * itself and descendants unless it is a root descriptor or itself is test
+	 * or any of its children describes a test.
+	 */
+	default void pruneTree() {
+		accept(TestDescriptor::prune);
 	}
 
 	/**
