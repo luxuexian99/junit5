@@ -74,6 +74,7 @@ on GitHub.
   `TestEngine` and `Extension` authors are encouraged to use these supported methods
   to align the behaviour with the JUnit Platform.
 
+
 [[release-notes-5.0.0-m4-junit-jupiter]]
 ==== JUnit Jupiter
 

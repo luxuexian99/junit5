@@ -148,8 +148,9 @@ public interface TestDescriptor {
 	}
 
 	/**
-	 * Determine this descriptors' {@link Type}.
+	 * Determine this descriptor's {@link Type}.
 	 *
+	 * @return the descriptor type; never {@code null}.
 	 * @see #isContainer()
 	 * @see #isTest()
 	 */
@@ -157,6 +158,8 @@ public interface TestDescriptor {
 
 	/**
 	 * Determine if this descriptor describes a container.
+	 *
+	 * <p>This default implementation delegates to {@link Type#isContainer()}.
 	 */
 	default boolean isContainer() {
 		return getType().isContainer();
@@ -164,6 +167,8 @@ public interface TestDescriptor {
 
 	/**
 	 * Determine if this descriptor describes a test.
+	 *
+	 * <p>This default implementation delegates to {@link Type#isTest()}.
 	 */
 	default boolean isTest() {
 		return getType().isTest();
@@ -250,12 +255,36 @@ public interface TestDescriptor {
 	 */
 	enum Type {
 
-		ENGINE, CONTAINER, TEST, CONTAINER_AND_TEST;
+		/**
+		 * Engine descriptor type.
+		 */
+		ENGINE,
 
+		/**
+		 * Generic container descriptor type.
+		 */
+		CONTAINER,
+
+		/**
+		 * Test descriptor type.
+		 */
+		TEST,
+
+		/**
+		 * Container <em>and</em> test descriptor type.
+		 */
+		CONTAINER_AND_TEST;
+
+		/**
+		 * @return {@code true} if this descriptor type can contain other descriptors, else {@code false}.
+		 */
 		public boolean isContainer() {
 			return this == ENGINE || this == CONTAINER || this == CONTAINER_AND_TEST;
 		}
 
+		/**
+		 * @return {@code true} if this descriptor type is a test, else {@code false}.
+		 */
 		public boolean isTest() {
 			return this == TEST || this == CONTAINER_AND_TEST;
 		}
