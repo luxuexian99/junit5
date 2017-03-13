@@ -97,10 +97,11 @@ on GitHub.
 * `TestInstancePostProcessors` registered on test methods are now invoked.
 * There are two new signatures `Assertions.fail` - `Assertions.fail(Throwable cause)` and
   `Assertions.fail(String message, Throwable cause)`.
-* Squashed logic behind `TestDescriptor.isTest()` and `TestDescriptor.isContainer()` from two
-  independent boolean properties into a single one. This results in an exclusive or relation ship.
+* Introduced `TestDescriptor.Type` enumeration with `TestDescriptor.getType()` accessor defining
+  all possible descriptor types. `TestDescriptor.isTest()` and `TestDescriptor.isContainer()`
+  only delegate to `TestDescriptor.Type` constants now.
 * Introduced `TestDescriptor.prune()` and `TestDescriptor.pruneTree()` which allows engine writers
-  customize what happens while pruning.
+  customize what happens when pruning is triggered by the JUnit Platform.
 
 [[release-notes-5.0.0-m4-junit-vintage]]
 ==== JUnit Vintage

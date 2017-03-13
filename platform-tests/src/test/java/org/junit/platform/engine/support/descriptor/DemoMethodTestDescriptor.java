@@ -64,8 +64,8 @@ public class DemoMethodTestDescriptor extends AbstractTestDescriptor {
 	}
 
 	@Override
-	public boolean isTest() {
-		return true;
+	public Type getType() {
+		return Type.TEST;
 	}
 
 }

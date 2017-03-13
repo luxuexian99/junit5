@@ -32,8 +32,8 @@ class DynamicTestTestDescriptor extends JupiterTestDescriptor {
 	}
 
 	@Override
-	public boolean isTest() {
-		return true;
+	public Type getType() {
+		return Type.TEST;
 	}
 
 	@Override

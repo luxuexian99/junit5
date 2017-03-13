@@ -721,8 +721,8 @@ class JUnitPlatformRunnerTests {
 		}
 
 		@Override
-		public boolean isTest() {
-			return false;
+		public Type getType() {
+			return Type.CONTAINER;
 		}
 	}
 
@@ -733,8 +733,8 @@ class JUnitPlatformRunnerTests {
 		}
 
 		@Override
-		public boolean isTest() {
-			return true;
+		public Type getType() {
+			return Type.TEST;
 		}
 	}
 

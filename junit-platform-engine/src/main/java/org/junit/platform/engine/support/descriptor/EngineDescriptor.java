@@ -13,13 +13,11 @@ package org.junit.platform.engine.support.descriptor;
 import static org.junit.platform.commons.meta.API.Usage.Experimental;
 
 import org.junit.platform.commons.meta.API;
-import org.junit.platform.engine.TestDescriptor;
-import org.junit.platform.engine.TestEngine;
 import org.junit.platform.engine.UniqueId;
 
 /**
- * An {@code EngineDescriptor} is a {@link TestDescriptor} for a specific
- * {@link TestEngine}.
+ * An {@code EngineDescriptor} is a {@link org.junit.platform.engine.TestDescriptor} for a specific
+ * {@link org.junit.platform.engine.TestEngine}.
  *
  * @since 1.0
  */
@@ -34,22 +32,21 @@ public class EngineDescriptor extends AbstractTestDescriptor {
 	 * never {@code null}
 	 * @param displayName the display name for the described {@code TestEngine};
 	 * never {@code null} or blank
-	 * @see TestEngine#getId()
-	 * @see TestDescriptor#getDisplayName()
+	 * @see org.junit.platform.engine.TestEngine#getId()
+	 * @see org.junit.platform.engine.TestDescriptor#getDisplayName()
 	 */
 	public EngineDescriptor(UniqueId uniqueId, String displayName) {
 		super(uniqueId, displayName);
 	}
 
 	/**
-	 * Always returns {@code false}: a {@link TestEngine} is never a test.
+	 * Always returns {@link org.junit.platform.engine.TestDescriptor.Type#ENGINE}.
 	 *
+	 * @see org.junit.platform.engine.TestDescriptor#isContainer() Test2()
 	 * @see org.junit.platform.engine.TestDescriptor#isTest()
-	 * @see #isContainer()
 	 */
 	@Override
-	public final boolean isTest() {
-		return false;
+	public final Type getType() {
+		return Type.ENGINE;
 	}
-
 }

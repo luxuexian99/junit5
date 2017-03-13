@@ -44,8 +44,8 @@ class TestTemplateTestDescriptorTests {
 		return new AbstractTestDescriptor(uniqueId, "testDescriptor with tags") {
 
 			@Override
-			public boolean isTest() {
-				return false;
+			public Type getType() {
+				return Type.CONTAINER;
 			}
 
 			@Override

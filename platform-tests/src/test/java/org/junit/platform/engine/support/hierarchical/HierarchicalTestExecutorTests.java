@@ -404,8 +404,8 @@ public class HierarchicalTestExecutorTests {
 		}
 
 		@Override
-		public boolean isTest() {
-			return false;
+		public Type getType() {
+			return Type.CONTAINER;
 		}
 
 		@Override
@@ -428,8 +428,8 @@ public class HierarchicalTestExecutorTests {
 		}
 
 		@Override
-		public boolean isTest() {
-			return true;
+		public Type getType() {
+			return Type.TEST;
 		}
 
 		@Override

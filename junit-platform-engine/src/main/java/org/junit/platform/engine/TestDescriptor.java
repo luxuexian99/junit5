@@ -148,28 +148,26 @@ public interface TestDescriptor {
 	}
 
 	/**
-	 * Determine if this descriptor describes a container.
+	 * Determine this descriptors' {@link Type}.
 	 *
-	 * <p>This default implementation negates the boolean result returned by
-	 * {@link #isTest()}. This makes being a test descriptor or a container
-	 * descriptor mutual exclusive.
-	 *
-	 * @return {@code true} if this descriptor is a container; if it is a
-	 * test {@code false} is returned.
+	 * @see #isContainer()
 	 * @see #isTest()
 	 */
+	Type getType();
+
+	/**
+	 * Determine if this descriptor describes a container.
+	 */
 	default boolean isContainer() {
-		return !isTest();
+		return getType().isContainer();
 	}
 
 	/**
 	 * Determine if this descriptor describes a test.
-	 *
-	 * @return {@code true} if this descriptor is a test; if it is a
-	 * container {@code false} is returned.
-	 * @see #isContainer()
 	 */
-	boolean isTest();
+	default boolean isTest() {
+		return getType().isTest();
+	}
 
 	/**
 	 * Determine if this descriptor or any of its descendants describes a test.
@@ -247,4 +245,19 @@ public interface TestDescriptor {
 		void visit(TestDescriptor descriptor);
 	}
 
+	/**
+	 * Descriptor type constants.
+	 */
+	enum Type {
+
+		ENGINE, CONTAINER, TEST, CONTAINER_AND_TEST;
+
+		public boolean isContainer() {
+			return this == ENGINE || this == CONTAINER || this == CONTAINER_AND_TEST;
+		}
+
+		public boolean isTest() {
+			return this == TEST || this == CONTAINER_AND_TEST;
+		}
+	}
 }

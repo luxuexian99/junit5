@@ -50,8 +50,8 @@ public class TestFactoryTestDescriptor extends MethodTestDescriptor {
 	// --- TestDescriptor ------------------------------------------------------
 
 	@Override
-	public boolean isTest() {
-		return false;
+	public Type getType() {
+		return Type.CONTAINER;
 	}
 
 	@Override

@@ -42,8 +42,8 @@ public class DemoHierarchicalContainerDescriptor extends AbstractTestDescriptor
 	}
 
 	@Override
-	public boolean isTest() {
-		return false;
+	public Type getType() {
+		return Type.CONTAINER;
 	}
 
 	@Override

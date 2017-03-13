@@ -68,8 +68,8 @@ public class MethodTestDescriptor extends MethodBasedTestDescriptor {
 	}
 
 	@Override
-	public boolean isTest() {
-		return true;
+	public Type getType() {
+		return Type.TEST;
 	}
 
 	// --- Node ----------------------------------------------------------------

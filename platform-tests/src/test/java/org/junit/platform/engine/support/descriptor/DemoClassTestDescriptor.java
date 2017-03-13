@@ -47,8 +47,8 @@ public class DemoClassTestDescriptor extends AbstractTestDescriptor {
 	}
 
 	@Override
-	public final boolean isTest() {
-		return false;
+	public Type getType() {
+		return Type.CONTAINER;
 	}
 
 }

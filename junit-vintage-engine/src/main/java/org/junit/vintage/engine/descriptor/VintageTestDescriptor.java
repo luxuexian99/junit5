@@ -53,8 +53,8 @@ public class VintageTestDescriptor extends AbstractTestDescriptor {
 		this(parent, segmentType, segmentValue, description, toTestSource(description));
 	}
 
-	VintageTestDescriptor(TestDescriptor parent, String segmentType, String segmentValue, Description description,
-			Optional<? extends TestSource> source) {
+	private VintageTestDescriptor(TestDescriptor parent, String segmentType, String segmentValue,
+			Description description, Optional<? extends TestSource> source) {
 
 		this(parent, segmentType, segmentValue, description, generateDisplayName(description), source);
 	}
@@ -77,8 +77,8 @@ public class VintageTestDescriptor extends AbstractTestDescriptor {
 	}
 
 	@Override
-	public boolean isTest() {
-		return description.isTest();
+	public Type getType() {
+		return description.isTest() ? Type.TEST : Type.CONTAINER;
 	}
 
 	@Override
