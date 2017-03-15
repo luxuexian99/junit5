@@ -74,7 +74,6 @@ on GitHub.
   `TestEngine` and `Extension` authors are encouraged to use these supported methods
   to align the behaviour with the JUnit Platform.
 
-
 [[release-notes-5.0.0-m4-junit-jupiter]]
 ==== JUnit Jupiter
 
@@ -103,6 +102,7 @@ on GitHub.
   only delegate to `TestDescriptor.Type` constants now.
 * Introduced `TestDescriptor.prune()` and `TestDescriptor.pruneTree()` which allows engine writers
   customize what happens when pruning is triggered by the JUnit Platform.
+
 
 [[release-notes-5.0.0-m4-junit-vintage]]
 ==== JUnit Vintage

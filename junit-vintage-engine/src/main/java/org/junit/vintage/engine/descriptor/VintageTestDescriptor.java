@@ -53,8 +53,8 @@ public class VintageTestDescriptor extends AbstractTestDescriptor {
 		this(parent, segmentType, segmentValue, description, toTestSource(description));
 	}
 
-	private VintageTestDescriptor(TestDescriptor parent, String segmentType, String segmentValue,
-			Description description, Optional<? extends TestSource> source) {
+	VintageTestDescriptor(TestDescriptor parent, String segmentType, String segmentValue, Description description,
+			Optional<? extends TestSource> source) {
 
 		this(parent, segmentType, segmentValue, description, generateDisplayName(description), source);
 	}

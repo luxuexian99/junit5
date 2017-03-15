@@ -45,6 +45,7 @@ public final class TestIdentifier implements Serializable {
 	private final TestSource source;
 	private final Set<TestTag> tags;
 	private final boolean test;
+	private final boolean container;
 	private final String legacyReportingName;
 
 	/**
@@ -58,20 +59,22 @@ public final class TestIdentifier implements Serializable {
 		Optional<TestSource> source = testDescriptor.getSource();
 		Set<TestTag> tags = testDescriptor.getTags();
 		boolean test = testDescriptor.isTest();
+		boolean container = testDescriptor.isContainer();
 		Optional<String> parentId = testDescriptor.getParent().map(
 			parentDescriptor -> parentDescriptor.getUniqueId().toString());
 		String legacyReportingName = testDescriptor.getLegacyReportingName();
-		return new TestIdentifier(uniqueId, displayName, source, tags, test, parentId, legacyReportingName);
+		return new TestIdentifier(uniqueId, displayName, source, tags, test, container, parentId, legacyReportingName);
 	}
 
 	TestIdentifier(String uniqueId, String displayName, Optional<TestSource> source, Set<TestTag> tags, boolean test,
-			Optional<String> parentId, String legacyReportingName) {
+			boolean container, Optional<String> parentId, String legacyReportingName) {
 		this.uniqueId = uniqueId;
 		this.parentId = parentId.orElse(null);
 		this.displayName = displayName;
 		this.source = source.orElse(null);
 		this.tags = unmodifiableSet(new LinkedHashSet<>(tags));
 		this.test = test;
+		this.container = container;
 		this.legacyReportingName = legacyReportingName;
 	}
 
@@ -130,7 +133,7 @@ public final class TestIdentifier implements Serializable {
 	 * Determine if this identifier represents a container.
 	 */
 	public boolean isContainer() {
-		return !isTest();
+		return this.container;
 	}
 
 	/**
@@ -182,7 +185,7 @@ public final class TestIdentifier implements Serializable {
 				.append("source", this.source)
 				.append("tags", this.tags)
 				.append("test", this.test)
-				.append("container", this.isContainer())
+				.append("container", this.container)
 				.toString();
 		// @formatter:on
 	}
